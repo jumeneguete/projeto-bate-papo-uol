@@ -43,9 +43,23 @@ function renderizarMensagens (resposta){
             <span class="gray">(${resposta.data[i].time})</span> 
             <span class="bold">${resposta.data[i].from}</span> 
             para 
-            <span class="bold">${resposta.data[i].to} </span>: 
+            <span class="bold">${resposta.data[i].to}: </span> 
             ${resposta.data[i].text}
             </li>
         `;
     }
 }
+
+function manterConexao(){
+    const nome = document.querySelector(".participant-name").value;
+    const nomeObj = {name:nome}
+
+    axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/status", nomeObj);
+
+}
+
+function atualizar(){
+    setInterval(manterConexao, 5000);
+}
+
+atualizar();
