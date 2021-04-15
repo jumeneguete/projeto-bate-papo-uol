@@ -36,6 +36,31 @@ header ion-icon {
     font-size: 50px;
 }
 
+.all-messages{
+    width: 100vw;
+    font-size: 14px;
+    margin: 90px 0;
+}
+
+.all-messages .message{
+    line-height: 14px;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #fff;
+}
+
+.msgEntrouNaSala {
+    background-color: #DCDCDC;
+}
+
+.msgReservada {
+    background-color: #FFDEDE;
+}
+
+.all-messages span {
+    margin-right: 4px;
+}
+
 footer input {
     width: 80%;
     height: 100%;
@@ -150,6 +175,14 @@ footer ion-icon {
     position: absolute;
     top: 0;
     left:0
+}
+
+.gray {
+    color: gray;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 .hide {
