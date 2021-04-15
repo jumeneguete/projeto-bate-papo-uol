@@ -58,8 +58,5 @@ function manterConexao(){
 
 }
 
-function atualizar(){
-    setInterval(manterConexao, 5000);
-}
 
-atualizar();
+setInterval(manterConexao, 5000);
