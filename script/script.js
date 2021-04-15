@@ -15,7 +15,8 @@ function entradaDoParticipante(resposta){
     const salaDoChat = document.querySelector(".index");
     salaDoChat.classList.remove("hide");
 
-    carregarMensagens();
+    setInterval(carregarMensagens, 3000);
+
 }
 
 function insiraOutroNome(resposta){
@@ -42,10 +43,9 @@ function renderizarMensagens (resposta){
             <span class="gray">(${resposta.data[i].time})</span> 
             <span class="bold">${resposta.data[i].from}</span> 
             para 
-            <span class="bold">${resposta.data[i].to} </span> 
+            <span class="bold">${resposta.data[i].to} </span>: 
             ${resposta.data[i].text}
             </li>
         `;
     }
-
 }
