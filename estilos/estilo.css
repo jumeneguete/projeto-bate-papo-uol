@@ -69,6 +69,7 @@ footer ion-icon {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 90;
 }
 
 .name-request img {
@@ -93,6 +94,12 @@ footer ion-icon {
     background-color: #E7E7E7;
     border: 1px solid #696969;
     border-radius: 4px;
+}
+.name-request span{
+    color:red;
+    font-weight: bold;
+    font-size: 14px;
+    padding-bottom: 20px;
 }
 
 .options-bar {
@@ -138,13 +145,13 @@ footer ion-icon {
 .container {
     width: 100%;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.329);
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 5;
     position: absolute;
     top: 0;
     left:0
 }
 
-.name-request {
+.hide {
     display: none;
 }
