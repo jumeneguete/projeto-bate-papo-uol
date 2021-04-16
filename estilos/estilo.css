@@ -40,6 +40,7 @@ header ion-icon {
     width: 100vw;
     font-size: 14px;
     margin: 90px 0;
+    word-break: break-all;
 }
 
 .all-messages .message{
