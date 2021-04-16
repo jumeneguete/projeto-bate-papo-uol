@@ -1,6 +1,7 @@
 body{
     background-color: #E5E5E5;
     font-family: 'Roboto', sans-serif;
+    max-height: 100vh;
 }
 
 header, footer {
@@ -135,10 +136,11 @@ footer ion-icon {
     width: 75%;
     height: 100vh;
     background-color: #fff;
-    position: absolute;
-    top:0;
+    position: fixed;
+    bottom:0;
     right: 0;
     z-index: 50;
+    overflow-y: scroll;
 }
 
 .options-bar p {
@@ -154,6 +156,10 @@ footer ion-icon {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.all-contacts{
+    word-break: break-all;
 }
 
 .all-contacts span, .visibility span {
@@ -183,7 +189,7 @@ footer ion-icon {
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 50;
-    position: absolute;
+    position: fixed;
     top: 0;
     left:0
 }

@@ -40,8 +40,7 @@ function renderizarMensagens (resposta){
     ulMensagens.innerHTML = "";
 
     for(let i=0; i < resposta.data.length; i++){
-      
-    console.log(resposta.data[i].type)  
+    
         if (resposta.data[i].type === "status"){
             ulMensagens.innerHTML +=`
             <li class="message msgEntrouNaSala"> 
@@ -123,9 +122,13 @@ function abrirSideBar(){
     fundoPreto.classList.remove("hide");
     sideBar.classList.remove("hide");
 
+    mostrarUsuarios();
+    setInterval(mostrarUsuarios, 10000);
+}
+
+function mostrarUsuarios(){
     const promessa = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/participants");
     promessa.then(exibirListadeUsuarios);
-
 }
 
 function exibirListadeUsuarios(resposta){
@@ -141,7 +144,7 @@ function exibirListadeUsuarios(resposta){
 
     for(let i=0; i < resposta.data.length; i++){
        
-        listaDeContatos += `<div class="contact">
+        listaDeContatos.innerHTML += `<div class="contact">
                                 <div class="name">
                                     <ion-icon name="people"></ion-icon>
                                     <span>${resposta.data[i].name}</span>
@@ -149,7 +152,18 @@ function exibirListadeUsuarios(resposta){
                                 <ion-icon name="checkmark"></ion-icon>
                             </div>
     `}
-
-    console.log(listaDeContatos)
 }
 
+function voltarParaChat() {
+    const fundoPreto = document.querySelector(".container");
+    const sideBar = document.querySelector(".options-bar");
+
+    fundoPreto.classList.add("hide");
+    sideBar.classList.add("hide");
+}
+
+function atualizarContatosSideBar(){
+    const nome = document.querySelector(".participant-name").value;
+    const nomeObj = {name:nome}
+    axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/status", nomeObj);
+}
