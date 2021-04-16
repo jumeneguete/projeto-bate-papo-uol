@@ -7,8 +7,8 @@ function entrarNaSala(){
     promessa.catch(insiraOutroNome);
 }
 
-function entradaDoParticipante(resposta){
-    //console.log(resposta)
+function entradaDoParticipante(){
+    
     const entrar = document.querySelector(".name-request");
     entrar.classList.add("hide");
 
@@ -22,8 +22,6 @@ function entradaDoParticipante(resposta){
 }
 
 function insiraOutroNome(resposta){
-    console.log("oi");
-    console.log(resposta);
     const statusErro = resposta.response.status;
     
     if (statusErro === 400){
@@ -42,8 +40,11 @@ function renderizarMensagens (resposta){
     ulMensagens.innerHTML = "";
 
     for(let i=0; i < resposta.data.length; i++){
-        ulMensagens.innerHTML +=`
-            <li class="message"> 
+      
+    console.log(resposta.data[i].type)  
+        if (resposta.data[i].type === "status"){
+            ulMensagens.innerHTML +=`
+            <li class="message msgEntrouNaSala"> 
             <span class="gray">(${resposta.data[i].time})</span> 
             <span class="bold">${resposta.data[i].from}</span> 
             para 
@@ -51,6 +52,31 @@ function renderizarMensagens (resposta){
             ${resposta.data[i].text}
             </li>
         `;
+            
+        } else if (resposta.data[i].type === "private_message"){
+                const nome = document.querySelector(".participant-name").value;
+                if(resposta.data[i].to === nome || resposta.data[i].to === "Todos"){
+                    ulMensagens.innerHTML +=`
+                    <li class="message msgReservada"> 
+                    <span class="gray">(${resposta.data[i].time})</span> 
+                    <span class="bold">${resposta.data[i].from}</span> 
+                    para 
+                    <span class="bold">${resposta.data[i].to}: </span> 
+                    ${resposta.data[i].text}
+                    </li>
+                `;}
+        } else {
+
+            ulMensagens.innerHTML +=`
+            <li class="message msgPublica"> 
+            <span class="gray">(${resposta.data[i].time})</span> 
+            <span class="bold">${resposta.data[i].from}</span> 
+            para 
+            <span class="bold">${resposta.data[i].to}: </span> 
+            ${resposta.data[i].text}
+            </li>
+        `;
+        }
     }
     scrollAutomatico();
 }
@@ -58,7 +84,6 @@ function renderizarMensagens (resposta){
 function scrollAutomatico(){
     const ultimaMsg = document.querySelector(".all-messages .message:last-child");
     ultimaMsg.scrollIntoView();
-    console.log(ultimaMsg)
 }
 
 function manterConexao(){
@@ -76,9 +101,55 @@ function enviarMensagem(){
     const nome = document.querySelector(".participant-name").value;
     const novaMsg = {from: nome, to:"Todos", text: texto, type:"message"}
         
-    axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/messages", novaMsg);
+    const promessa = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/messages", novaMsg);
+    promessa.catch(erroLogarNovamente);
+
     carregarMensagens ();
 
-    document.querySelector(".new-messages").value = null
+    document.querySelector(".new-messages").value = null; //apaga o campo input de mensagem depois de enviar a msg
+}
+
+function erroLogarNovamente(){
+    window.location.reload();
+    alert("Sua sessão expirou!! :(")
+}
+
+//SIDE BAR DO BONUS ... tentando...
+
+function abrirSideBar(){
+    const fundoPreto = document.querySelector(".container");
+    const sideBar = document.querySelector(".options-bar");
+
+    fundoPreto.classList.remove("hide");
+    sideBar.classList.remove("hide");
+
+    const promessa = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/participants");
+    promessa.then(exibirListadeUsuarios);
+
+}
+
+function exibirListadeUsuarios(resposta){
+
+    let listaDeContatos = document.querySelector(".all-contacts");
+    listaDeContatos.innerHTML = `<div class="contact">
+                                    <div class="name">
+                                        <ion-icon name="people"></ion-icon>
+                                        <span>Público</span>
+                                    </div>  
+                                    <ion-icon name="checkmark"></ion-icon>
+                                </div>`;
+
+    for(let i=0; i < resposta.data.length; i++){
+       
+        listaDeContatos += `<div class="contact">
+                                <div class="name">
+                                    <ion-icon name="people"></ion-icon>
+                                    <span>${resposta.data[i].name}</span>
+                                </div>  
+                                <ion-icon name="checkmark"></ion-icon>
+                            </div>
+    `}
+
+    console.log(listaDeContatos)
 }
 

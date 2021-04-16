@@ -14,7 +14,7 @@
     <div class="index hide">
         <header>
             <img src="img/uol.png" alt="logo bate-papo uol">
-            <ion-icon name="people"></ion-icon>
+            <button onclick="abrirSideBar()"><ion-icon name="people"></ion-icon></button>
         </header>
 
         <ul class="all-messages">
@@ -37,24 +37,6 @@
     <div class="container hide"></div>
 
     <div class="options-bar hide">
-        <p>Escolha um contato para enviar mensagem:</p> 
-
-        <div class="contacts">
-            <div class="name">
-                <ion-icon name="people"></ion-icon>
-                <span>Público</span>
-            </div>  
-            <ion-icon name="checkmark"></ion-icon>
-        </div>
-
-        <div class="contacts">
-            <div class="name">
-                <ion-icon name="person-circle"></ion-icon>
-                <span>Fulano</span>
-            </div>
-            <ion-icon name="checkmark"></ion-icon>
-        </div>
-
         <p>Escolha a visibilidade:</p>
 
         <div class="visibility">
@@ -72,6 +54,27 @@
             </div>
             <ion-icon name="checkmark"></ion-icon>
         </div>
+        
+        <p>Escolha um contato para enviar mensagem:</p> 
+
+        <div class="all-contacts">
+            <div class="contact">
+                <div class="name">
+                    <ion-icon name="people"></ion-icon>
+                    <span>Público</span>
+                </div>  
+                <ion-icon name="checkmark"></ion-icon>
+            </div>
+
+            <div class="contact">
+                <div class="name">
+                    <ion-icon name="people"></ion-icon>
+                    <span>Fulano</span>
+                </div>  
+                <ion-icon name="checkmark"></ion-icon>
+            </div>
+        </div>
+
     </div>
     
 
