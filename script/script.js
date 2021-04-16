@@ -118,9 +118,11 @@ function erroLogarNovamente(){
 function abrirSideBar(){
     const fundoPreto = document.querySelector(".container");
     const sideBar = document.querySelector(".options-bar");
+    const iconePublicoCheck = document.querySelector(".public-msg");
 
     fundoPreto.classList.remove("hide");
     sideBar.classList.remove("hide");
+    iconePublicoCheck.classList.remove("hide");
 
     mostrarUsuarios();
     setInterval(mostrarUsuarios, 10000);
@@ -139,17 +141,17 @@ function exibirListadeUsuarios(resposta){
                                         <ion-icon name="people"></ion-icon>
                                         <span>Público</span>
                                     </div>  
-                                    <ion-icon name="checkmark"></ion-icon>
+                                    <ion-icon class="para-todos hide" name="checkmark"></ion-icon>
                                 </div>`;
 
     for(let i=0; i < resposta.data.length; i++){
        
-        listaDeContatos.innerHTML += `<div class="contact">
+        listaDeContatos.innerHTML += `<div class="contact" onclick="contatoMsgPrivada(this)">
                                 <div class="name">
                                     <ion-icon name="people"></ion-icon>
                                     <span>${resposta.data[i].name}</span>
                                 </div>  
-                                <ion-icon name="checkmark"></ion-icon>
+                                <ion-icon class="hide" name="checkmark"></ion-icon>
                             </div>
     `}
 }
@@ -167,3 +169,8 @@ function atualizarContatosSideBar(){
     const nomeObj = {name:nome}
     axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/status", nomeObj);
 }
+
+/*function contatoMsgPrivada(elemento){
+    const selecionado = elemento.querySelector(".contact > ion-icon");
+    selecionado.classList.remove("hide");
+}*/
