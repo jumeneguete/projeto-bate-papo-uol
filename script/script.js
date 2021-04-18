@@ -125,7 +125,7 @@ function abrirSideBar(){
     iconePublicoCheck.classList.remove("hide");
 
     mostrarUsuarios();
-    setInterval(mostrarUsuarios, 10000);
+    //setInterval(mostrarUsuarios, 10000);
 }
 
 function mostrarUsuarios(){
@@ -136,12 +136,12 @@ function mostrarUsuarios(){
 function exibirListadeUsuarios(resposta){
 
     let listaDeContatos = document.querySelector(".all-contacts");
-    listaDeContatos.innerHTML = `<div class="contact">
+    listaDeContatos.innerHTML = `<div class="contact publico selecionado" onclick="contatoMsgPrivada(this)">
                                     <div class="name">
                                         <ion-icon name="people"></ion-icon>
-                                        <span>Público</span>
+                                        <span>Todos</span>
                                     </div>  
-                                    <ion-icon class="para-todos hide" name="checkmark"></ion-icon>
+                                    <ion-icon class="para-todos icone-check selecionado" name="checkmark"></ion-icon>
                                 </div>`;
 
     for(let i=0; i < resposta.data.length; i++){
@@ -151,7 +151,7 @@ function exibirListadeUsuarios(resposta){
                                     <ion-icon name="people"></ion-icon>
                                     <span>${resposta.data[i].name}</span>
                                 </div>  
-                                <ion-icon class="hide" name="checkmark"></ion-icon>
+                                <ion-icon class="icone-check hide" name="checkmark"></ion-icon>
                             </div>
     `}
 }
@@ -170,7 +170,63 @@ function atualizarContatosSideBar(){
     axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/status", nomeObj);
 }
 
-/*function contatoMsgPrivada(elemento){
-    const selecionado = elemento.querySelector(".contact > ion-icon");
-    selecionado.classList.remove("hide");
-}*/
+function contatoMsgPrivada(elemento){
+
+    const selecionadoAntes = document.querySelector(".all-contacts > .selecionado");
+    const iconeSelecionadoAntes = document.querySelector(".all-contacts .contact > .selecionado");
+    
+    if (selecionadoAntes !== null){
+        selecionadoAntes.classList.remove("selecionado");
+        iconeSelecionadoAntes.classList.add("hide");
+        iconeSelecionadoAntes.classList.remove("selecionado");
+    }
+
+    const iconeSelecionadoAgora = elemento.querySelector(".icone-check");
+    iconeSelecionadoAgora.classList.remove("hide");
+    iconeSelecionadoAgora.classList.add("selecionado");
+    elemento.classList.add("selecionado");
+
+
+    /*const verificarPrivacidadePublica = iconeSelecionadoAgora.classList.contains("para-todos");
+
+    const visibilidadePublico = document.querySelector(".public-msg");
+    const visibilidadeReservado = document.querySelector(".private-msg");
+
+    if (verificarPrivacidadePublica === true){
+        visibilidadeReservado.classList.add("hide");
+        visibilidadePublico.classList.remove("hide");
+    } else {
+        visibilidadePublico.classList.add("hide");
+        visibilidadeReservado.classList.remove("hide");
+    }*/
+
+}
+
+function visibilidade(elemento){
+    const selecionadoAntes = document.querySelector(".visibility .selecionado");
+    const iconeSelecionadoAntes = document.querySelector(".options-bar .visibility > .selecionado");
+
+    if (selecionadoAntes !== null){
+        selecionadoAntes.classList.remove("selecionado");
+        iconeSelecionadoAntes.classList.add("hide");
+        iconeSelecionadoAntes.classList.remove("selecionado");
+    }
+
+    const iconeSelecionadoAgora = elemento.querySelector(".icone-visibilidade");
+    iconeSelecionadoAgora.classList.remove("hide");
+    iconeSelecionadoAgora.classList.add("selecionado");
+    elemento.classList.add("selecionado");
+
+    /*const verificarPrivacidadePublica = iconeSelecionadoAgora.classList.contains("public-msg");
+    const enviarParaTodosIcone = document.querySelector(".para-todos");
+    const enviarParaTodos = document.querySelector(".all-contacts .publico");
+
+    if (verificarPrivacidadePublica === true){
+        enviarParaTodosIcone.classList.add("selecionado");
+        enviarParaTodosIcone.classList.remove("hide");
+        enviarParaTodos.classList.add("selecionado");
+        enviarParaTodos.classList.remove("hide");
+
+        contatoMsgPrivada(enviarParaTodos);
+    }*/
+}
