@@ -54,7 +54,7 @@ function renderizarMensagens (resposta){
             
         } else if (resposta.data[i].type === "private_message"){
                 const nome = document.querySelector(".participant-name").value;
-                if(resposta.data[i].to === nome || resposta.data[i].to === "Todos"){
+                if(resposta.data[i].to === nome || resposta.data[i].from === nome ||resposta.data[i].to === "Todos"){
                     ulMensagens.innerHTML +=`
                     <li class="message msgReservada"> 
                     <span class="gray">(${resposta.data[i].time})</span> 
@@ -228,5 +228,6 @@ function visibilidade(elemento){
         enviarParaTodos.classList.remove("hide");
 
         contatoMsgPrivada(enviarParaTodos);
-    }*/
+    } NAO ESTA FUNCIONANDO -- DA BUG COM O DE CIMA (dentro de contatoMsgPrivada())
+    O DE CIMA UNCIONA DIREITO SEM ESSE PEDAÇO AQUI*/
 }
