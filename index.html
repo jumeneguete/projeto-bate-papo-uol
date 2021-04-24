@@ -11,7 +11,7 @@
     <title>Bate-papo UOL</title>
 </head>
 <body>
-    <div class="index hide">
+    <main class="index hide">
         <header>
             <img src="img/uol.png" alt="logo bate-papo uol">
             <button onclick="abrirSideBar()"><ion-icon name="people"></ion-icon></button>
@@ -28,7 +28,7 @@
             </div>
             <button onclick="enviarMensagem()"><ion-icon name="paper-plane-outline"></ion-icon></button>
         </footer>
-    </div>
+    </main>
 
     <div class="name-request">
         <img src="img/uol.png" alt="logo bate-papo uol">
@@ -39,7 +39,7 @@
 
     <div class="container hide" onclick="voltarParaChat()"></div>
 
-    <div class="options-bar hide">
+    <aside class="options-bar hide">
         <p>Escolha a visibilidade:</p>
 
         <div class="visibility" onclick="visibilidade(this)">
@@ -68,7 +68,8 @@
                 </div>  
                 <ion-icon class="para-todos hide" name="checkmark"></ion-icon>
             </div>-->
-    </div>
+        </div>
+    </aside>
     
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
