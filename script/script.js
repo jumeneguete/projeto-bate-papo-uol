@@ -102,8 +102,7 @@ function enviarMensagem(){
         
     const promessa = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/messages", novaMsg);
     promessa.catch(erroLogarNovamente);
-
-    carregarMensagens ();
+    promessa.then(carregarMensagens); //para enviar imediatamente quando recebo a resposta e aperto o enviar
 
     document.querySelector(".new-messages").value = null; //apaga o campo input de mensagem depois de enviar a msg
 }
