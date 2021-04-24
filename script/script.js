@@ -1,3 +1,6 @@
+let destinatario= "Todos";
+let tipoMensagem = "message";
+
 function entrarNaSala(){
     const nome = document.querySelector(".participant-name").value;
     const nomeObj = {name:nome}
@@ -96,11 +99,11 @@ function atualizar(){
 function enviarMensagem(){
     let texto = document.querySelector(".new-messages").value;
     const nome = document.querySelector(".participant-name").value;
-    const novaMsg = {from: nome, to:"Todos", text: texto, type:"message"}
+    const novaMsg = {from: nome, to: destinatario, text: texto, type: tipoMensagem}
         
     const promessa = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/messages", novaMsg);
     promessa.catch(erroLogarNovamente);
-    promessa.then(carregarMensagens);
+    promessa.then(carregarMensagens); // para enviar a mensagem imediatamente depois que apertar o botão
 
     document.querySelector(".new-messages").value = null; //apaga o campo input de mensagem depois de enviar a msg
 }
@@ -122,7 +125,7 @@ function abrirSideBar(){
     iconePublicoCheck.classList.remove("hide");
 
     mostrarUsuarios();
-    //setInterval(mostrarUsuarios, 10000);
+    setInterval(mostrarUsuarios, 10000);
 }
 
 function mostrarUsuarios(){
@@ -131,9 +134,8 @@ function mostrarUsuarios(){
 }
 
 function exibirListadeUsuarios(resposta){
-
     let listaDeContatos = document.querySelector(".all-contacts");
-    listaDeContatos.innerHTML = `<div class="contact publico selecionado" onclick="contatoMsgPrivada(this)">
+    listaDeContatos.innerHTML = `<div class="contact publico selecionado" onclick="msgParaContatoEspecifico(this)">
                                     <div class="name">
                                         <ion-icon name="people"></ion-icon>
                                         <span>Todos</span>
@@ -143,7 +145,7 @@ function exibirListadeUsuarios(resposta){
 
     for(let i=0; i < resposta.data.length; i++){
        
-        listaDeContatos.innerHTML += `<div class="contact" onclick="contatoMsgPrivada(this)">
+        listaDeContatos.innerHTML += `<div class="contact" onclick="msgParaContatoEspecifico(this)">
                                 <div class="name">
                                     <ion-icon name="people"></ion-icon>
                                     <span>${resposta.data[i].name}</span>
@@ -167,7 +169,7 @@ function atualizarContatosSideBar(){
     axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/status", nomeObj);
 }
 
-function contatoMsgPrivada(elemento){
+function msgParaContatoEspecifico(elemento){
 
     const selecionadoAntes = document.querySelector(".all-contacts > .selecionado");
     const iconeSelecionadoAntes = document.querySelector(".all-contacts .contact > .selecionado");
@@ -183,19 +185,9 @@ function contatoMsgPrivada(elemento){
     iconeSelecionadoAgora.classList.add("selecionado");
     elemento.classList.add("selecionado");
 
+    
 
-    /*const verificarPrivacidadePublica = iconeSelecionadoAgora.classList.contains("para-todos");
-
-    const visibilidadePublico = document.querySelector(".public-msg");
-    const visibilidadeReservado = document.querySelector(".private-msg");
-
-    if (verificarPrivacidadePublica === true){
-        visibilidadeReservado.classList.add("hide");
-        visibilidadePublico.classList.remove("hide");
-    } else {
-        visibilidadePublico.classList.add("hide");
-        visibilidadeReservado.classList.remove("hide");
-    }*/
+    destinatario = elemento.querySelector(".name span").innerHTML;   
 
 }
 
@@ -214,17 +206,13 @@ function visibilidade(elemento){
     iconeSelecionadoAgora.classList.add("selecionado");
     elemento.classList.add("selecionado");
 
-    /*const verificarPrivacidadePublica = iconeSelecionadoAgora.classList.contains("public-msg");
-    const enviarParaTodosIcone = document.querySelector(".para-todos");
-    const enviarParaTodos = document.querySelector(".all-contacts .publico");
+    const privado = document.querySelector(".private-msg.selecionado");
+    const publica = document.querySelector(".public-msg.selecionado");
+    
+    if (privado !== null){
+        tipoMensagem = "private_message"
+    } else if (publica !== null){
+        tipoMensagem = "message"
+    }
 
-    if (verificarPrivacidadePublica === true){
-        enviarParaTodosIcone.classList.add("selecionado");
-        enviarParaTodosIcone.classList.remove("hide");
-        enviarParaTodos.classList.add("selecionado");
-        enviarParaTodos.classList.remove("hide");
-
-        contatoMsgPrivada(enviarParaTodos);
-    } NAO ESTA FUNCIONANDO -- DA BUG COM O DE CIMA (dentro de contatoMsgPrivada())
-    O DE CIMA UNCIONA DIREITO SEM ESSE PEDAÇO AQUI*/
 }
