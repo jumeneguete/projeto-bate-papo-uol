@@ -21,6 +21,7 @@ function entradaDoParticipante(){
     carregarMensagens();
     setInterval(carregarMensagens, 3000);
     atualizar();
+    setInterval(textoNoCampoDeEnviarMsg, 2000);
 
 }
 
@@ -185,8 +186,6 @@ function msgParaContatoEspecifico(elemento){
     iconeSelecionadoAgora.classList.add("selecionado");
     elemento.classList.add("selecionado");
 
-    
-
     destinatario = elemento.querySelector(".name span").innerHTML;   
 
 }
@@ -214,5 +213,14 @@ function visibilidade(elemento){
     } else if (publica !== null){
         tipoMensagem = "message"
     }
+}
 
+function textoNoCampoDeEnviarMsg() {
+    const msg = document.querySelector(".msg-e-descricao p");
+
+    if (tipoMensagem === "message"){
+        msg.innerHTML = `Enviando para ${destinatario}`
+    } else if (tipoMensagem === "private_message"){
+        msg.innerHTML = `Enviando reservadamente para ${destinatario}`
+    }    
 }

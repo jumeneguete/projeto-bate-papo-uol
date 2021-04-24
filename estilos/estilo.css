@@ -67,9 +67,14 @@ header ion-icon {
     margin-right: 4px;
 }
 
-footer input {
+footer .msg-e-descricao{
     width: 80%;
     height: 100%;
+}
+
+footer input {
+    width: 100%;
+    padding-top: 20px;
     border:none;
     font-size: 18px;
     font-style: italic;
@@ -79,6 +84,12 @@ footer input {
 footer input:focus {
     box-shadow: 0 0 0 0;
     outline: 0;
+  }
+
+  footer p {
+      margin-top: 10px;
+      color: gray;
+      font-size: 14px;
   }
 
 footer button, header button {
