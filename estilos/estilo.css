@@ -190,6 +190,11 @@ footer ion-icon {
 .contact > ion-icon, .visibility > ion-icon {
     font-size: 18px; 
     color: #28BB25;
+    display: none;
+}
+
+.contact.selecionado > ion-icon, .visibility.selecionado > ion-icon {
+    display: inline;
 }
 
 .name, .status {

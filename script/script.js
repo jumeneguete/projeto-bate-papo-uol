@@ -80,12 +80,17 @@ function renderizarMensagens (resposta){
         }
     }
     scrollAutomatico();
+    //document.querySelector(".all-messages").onscroll = scrollManual();  --> nao sei nem se deveria chamar aqui dentro msm
 }
 
 function scrollAutomatico(){
     const ultimaMsg = document.querySelector(".all-messages .message:last-child");
     ultimaMsg.scrollIntoView();
 }
+
+/*function scrollManual (){
+    //desabilitar o scrollAutomatico
+}*/
 
 function manterConexao(){
     const nome = document.querySelector(".participant-name").value;
@@ -141,7 +146,7 @@ function exibirListadeUsuarios(resposta){
                                         <ion-icon name="people"></ion-icon>
                                         <span>Todos</span>
                                     </div>  
-                                    <ion-icon class="para-todos icone-check selecionado" name="checkmark"></ion-icon>
+                                    <ion-icon class="icone-check" name="checkmark"></ion-icon>
                                 </div>`;
 
     for(let i=0; i < resposta.data.length; i++){
@@ -151,7 +156,7 @@ function exibirListadeUsuarios(resposta){
                                     <ion-icon name="people"></ion-icon>
                                     <span>${resposta.data[i].name}</span>
                                 </div>  
-                                <ion-icon class="icone-check hide" name="checkmark"></ion-icon>
+                                <ion-icon class="icone-check" name="checkmark"></ion-icon>
                             </div>
     `}
 }
@@ -172,41 +177,29 @@ function atualizarContatosSideBar(){
 
 function msgParaContatoEspecifico(elemento){
 
-    const selecionadoAntes = document.querySelector(".all-contacts > .selecionado");
-    const iconeSelecionadoAntes = document.querySelector(".all-contacts .contact > .selecionado");
+    const selecionadoAntes = document.querySelector(".contact.selecionado");
     
     if (selecionadoAntes !== null){
         selecionadoAntes.classList.remove("selecionado");
-        iconeSelecionadoAntes.classList.add("hide");
-        iconeSelecionadoAntes.classList.remove("selecionado");
     }
 
-    const iconeSelecionadoAgora = elemento.querySelector(".icone-check");
-    iconeSelecionadoAgora.classList.remove("hide");
-    iconeSelecionadoAgora.classList.add("selecionado");
     elemento.classList.add("selecionado");
 
-    destinatario = elemento.querySelector(".name span").innerHTML;   
+    destinatario = elemento.querySelector(".name span").innerHTML;  
 
 }
 
 function visibilidade(elemento){
-    const selecionadoAntes = document.querySelector(".visibility .selecionado");
-    const iconeSelecionadoAntes = document.querySelector(".options-bar .visibility > .selecionado");
+    const selecionadoAntes = document.querySelector(".visibility.selecionado");
 
     if (selecionadoAntes !== null){
         selecionadoAntes.classList.remove("selecionado");
-        iconeSelecionadoAntes.classList.add("hide");
-        iconeSelecionadoAntes.classList.remove("selecionado");
     }
 
-    const iconeSelecionadoAgora = elemento.querySelector(".icone-visibilidade");
-    iconeSelecionadoAgora.classList.remove("hide");
-    iconeSelecionadoAgora.classList.add("selecionado");
     elemento.classList.add("selecionado");
 
-    const privado = document.querySelector(".private-msg.selecionado");
-    const publica = document.querySelector(".public-msg.selecionado");
+    const privado = document.querySelector(".visibility.selecionado .private-msg");
+    const publica = document.querySelector(".visibility.selecionado .public-msg");
     
     if (privado !== null){
         tipoMensagem = "private_message"
