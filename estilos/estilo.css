@@ -41,6 +41,7 @@ header ion-icon {
     width: 100vw;
     font-size: 14px;
     margin: 90px 0;
+    padding-bottom: 85px;
     word-break: break-all;
 }
 

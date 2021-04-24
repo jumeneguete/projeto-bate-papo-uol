@@ -45,9 +45,7 @@ function renderizarMensagens (resposta){
             ulMensagens.innerHTML +=`
             <li class="message msgEntrouNaSala"> 
             <span class="gray">(${resposta.data[i].time})</span> 
-            <span class="bold">${resposta.data[i].from}</span> 
-            para 
-            <span class="bold">${resposta.data[i].to}: </span> 
+            <span class="bold">${resposta.data[i].from}</span>
             ${resposta.data[i].text}
             </li>
         `;
@@ -59,7 +57,7 @@ function renderizarMensagens (resposta){
                     <li class="message msgReservada"> 
                     <span class="gray">(${resposta.data[i].time})</span> 
                     <span class="bold">${resposta.data[i].from}</span> 
-                    para 
+                    reservadamente para 
                     <span class="bold">${resposta.data[i].to}: </span> 
                     ${resposta.data[i].text}
                     </li>
@@ -102,7 +100,7 @@ function enviarMensagem(){
         
     const promessa = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/messages", novaMsg);
     promessa.catch(erroLogarNovamente);
-    promessa.then(carregarMensagens); //para enviar imediatamente quando recebo a resposta e aperto o enviar
+    promessa.then(carregarMensagens);
 
     document.querySelector(".new-messages").value = null; //apaga o campo input de mensagem depois de enviar a msg
 }
