@@ -217,3 +217,21 @@ function textoNoCampoDeEnviarMsg() {
         msg.innerHTML = `Enviando reservadamente para ${destinatario}`
     }    
 }
+
+//enviar mensagem com ENTER
+var input = document.getElementById("myInput");
+input.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+    event.preventDefault();
+    document.getElementById("myBtn").click();
+    }
+});
+
+//enviar nome ao entrar com ENTER
+var inputEntrada = document.getElementById("nome");
+inputEntrada.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+    event.preventDefault();
+    document.getElementById("entrar").click();
+    }
+});

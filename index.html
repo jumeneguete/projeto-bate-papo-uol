@@ -23,18 +23,18 @@
 
         <footer>
             <div class="msg-e-descricao">
-                <input type="text" class="new-messages" placeholder="Escreva aqui...">
+                <input type="text" id="myInput" class="new-messages" placeholder="Escreva aqui...">
                 <p>Enviando para Todos</p>
             </div>
-            <button onclick="enviarMensagem()"><ion-icon name="paper-plane-outline"></ion-icon></button>
+            <button id="myBtn" onclick="enviarMensagem()"><ion-icon name="paper-plane-outline"></ion-icon></button>
         </footer>
     </main>
 
     <div class="name-request">
         <img src="img/uol.png" alt="logo bate-papo uol">
-        <input type="text" class="participant-name" placeholder="Digite o seu nome">
+        <input type="text" id="nome" class="participant-name" placeholder="Digite o seu nome">
         <span class="hide">Este nome já está sendo usado.<ion-icon name="sad-outline"></ion-icon></span>
-        <button onclick="entrarNaSala()">Entrar</button>
+        <button id="entrar" onclick="entrarNaSala()">Entrar</button>
     </div>
 
     <div class="container hide" onclick="voltarParaChat()"></div>
